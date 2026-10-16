@@ -9,7 +9,5 @@ def get_llm() -> ChatOllama:
     - temperature=0: Giúp AI trả lời chính xác, bám sát tài liệu thay vì bịa.
     """
     return ChatOllama(
-        model=settings.OLLAMA_MODEL,
-        base_url=settings.OLLAMA_HOST,
-        temperature=0 
+        model=settings.OLLAMA_MODEL, base_url=settings.OLLAMA_HOST, temperature=0
     )

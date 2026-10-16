@@ -4,6 +4,7 @@ streamlit
 unstructured
 requests
 python-docx
+pytest
 python-multipart
 python-dotenv
 pydantic-settings

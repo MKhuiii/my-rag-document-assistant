@@ -13,6 +13,5 @@ def get_vector_store() -> PGVector:
         embeddings=get_embedding_model(),
         collection_name="rag_documents",
         connection=settings.DATABASE_URL,
-        use_jsonb=True
+        use_jsonb=True,
     )
-

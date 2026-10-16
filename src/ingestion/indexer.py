@@ -9,18 +9,18 @@ def index_document(filepath: str) -> int:
     1. Đọc file văn bản thô
     2. Cắt thành các đoạn nhỏ (chunks)
     3. Tạo Embedding cho từng đoạn và lưu vào PostgreSQL (PGVector)
-    
+
     Trả về: Số lượng chunks đã được lưu thành công.
     """
 
-    #Đọc file
+    # Đọc file
     document = load_single_document(filepath)
 
-    #Cắt file
+    # Cắt file
     splitter = get_text_splitter()
     chunks = splitter.split_documents(document)
 
-    #Lưu vào PGVector 
+    # Lưu vào PGVector
     vector_store = get_vector_store()
     vector_store.add_documents(chunks)
 

@@ -15,10 +15,10 @@ class Settings(BaseSettings):
     OLLAMA_HOST: str = "http://127.0.0.1:11434"
 
     # Embedding
-    EMBEDDING_MODEL: str = "BAAI/bge-m3"
+    EMBEDDING_MODEL: str = "bge-m3"
     EMBEDDING_DIM: int = 1024
 
-    #Chunking
+    # Chunking
     CHUNK_SIZE: int = 512
     CHUNK_OVERLAP: int = 50
 
