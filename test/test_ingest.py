@@ -6,7 +6,7 @@ from src.ingestion.indexer import index_document
 
 
 def test_ingest_document():
-    """Bài test kiểm tra quy trình Chunking, Embedding và lưu vào PGVector."""
+    """Bài test kiểm tra quy trình Chunking và lưu vào PGVector (Mock Embedding cho CI)."""
     sample_dir = "data/raw"
     os.makedirs(sample_dir, exist_ok=True)
     sample_file = os.path.join(sample_dir, "sample_test.txt")
@@ -18,16 +18,14 @@ def test_ingest_document():
             "Hệ thống cho phép người dùng nạp các tài liệu PDF và TXT để thực hiện tra cứu thông tin."
         )
 
-    num_chunks = index_document(sample_file)
-    assert num_chunks > 0
-    # 1. Tạo giả lập (Mock) cho Embedding Model trả về vector 1024 chiều
+    # 1. Giả lập (Mock) Embedding Model trả về vector 1024 chiều (đúng kích thước bge-m3)
     mock_embedding = MagicMock()
     mock_embedding.embed_documents.side_effect = lambda texts: [
         [0.1] * settings.EMBEDDING_DIM for _ in texts
     ]
     mock_embedding.embed_query.return_value = [0.1] * settings.EMBEDDING_DIM
 
-    # 2. Patch hàm get_embedding_model trong module vector_db
+    # 2. Bọc hàm index_document vào trong patch context
     with patch("src.core.vector_db.get_embedding_model", return_value=mock_embedding):
         num_chunks = index_document(sample_file)
         assert num_chunks > 0
@@ -35,4 +33,4 @@ def test_ingest_document():
 
 if __name__ == "__main__":
     test_ingest_document()
-    print("Thành công!")
+    print("Test ingest thành công!")
