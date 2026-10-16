@@ -1,3 +1,20 @@
-./venv/Scripts/ruff format .
-./venv/Scripts/ruff check --fix .
-git add -u
+#!/bin/sh
+
+# 1. Lấy danh sách các tệp .py đang được staged (tránh dùng grep để không bị exit code 1)
+files=$(git diff --cached --name-only --diff-filter=ACM -- "*.py")
+
+# 2. Nếu có tệp Python thì mới tiến hành format & linting
+if [ -n "$files" ]; then
+  # Xác định đường dẫn ruff trong venv (hỗ trợ cả Windows và Linux)
+  if [ -f "./venv/Scripts/ruff.exe" ]; then
+    RUFF="./venv/Scripts/ruff.exe"
+  elif [ -f "./venv/bin/ruff" ]; then
+    RUFF="./venv/bin/ruff"
+  else
+    RUFF="ruff"
+  fi
+
+  $RUFF format $files
+  $RUFF check --fix $files
+  git add $files
+fi
