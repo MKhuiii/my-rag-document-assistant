@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+streamlit
+requests
+python-multipart
+python-dotenv
+pydantic-settings
+psycopg2-binary
+
+# LangChain
+langchain
+langchain-core
+langchain-community
+langchain-ollama
+langchain-postgres
+langchain-text-splitters
