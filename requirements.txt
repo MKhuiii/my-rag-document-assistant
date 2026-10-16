@@ -1,7 +1,9 @@
 fastapi
 uvicorn
 streamlit
+unstructured
 requests
+python-docx
 python-multipart
 python-dotenv
 pydantic-settings
