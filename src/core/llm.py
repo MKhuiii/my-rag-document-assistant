@@ -1,5 +1,7 @@
 from langchain_ollama import ChatOllama
+
 from src.config import OLLAMA_HOST, OLLAMA_MODEL
+
 
 def get_llm() -> ChatOllama:
 
