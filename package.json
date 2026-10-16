@@ -1,0 +1,29 @@
+{
+  "name": "my-rag-assistant",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000m\u0000y\u0000-\u0000r\u0000a\u0000g\u0000-\u0000d\u0000o\u0000c\u0000u\u0000m\u0000e\u0000n\u0000t\u0000-\u0000a\u0000s\u0000s\u0000i\u0000s\u0000t\u0000a\u0000n\u0000t\u0000\r\u0000 \u0000#\u0000 \u0000m\u0000y\u0000-\u0000r\u0000a\u0000g\u0000-\u0000d\u0000o\u0000c\u0000u\u0000m\u0000e\u0000n\u0000t\u0000-\u0000a\u0000s\u0000s\u0000i\u0000s\u0000t\u0000a\u0000n\u0000t\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Done\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MKhuiii/my-rag-document-assistant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MKhuiii/my-rag-document-assistant/issues"
+  },
+  "homepage": "https://github.com/MKhuiii/my-rag-document-assistant#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "husky": "^9.1.7"
+  }
+}
