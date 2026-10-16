@@ -1,12 +1,12 @@
 from langchain_ollama import OllamaEmbeddings
 
-from src.config import EMBEDDING_DIM, EMBEDDING_MODEL, OLLAMA_HOST
+from src.config import settings
 
 
 def get_embedding_model() -> OllamaEmbeddings:
 
     return OllamaEmbeddings(
-        model=EMBEDDING_MODEL,
-        base_url=OLLAMA_HOST,
-        dimensions=EMBEDDING_DIM
+        model=settings.EMBEDDING_MODEL,
+        base_url=settings.OLLAMA_HOST,
+        dimensions=settings.EMBEDDING_DIM
     )

@@ -11,6 +11,7 @@ psycopg2-binary
 langchain
 langchain-core
 langchain-community
+langchain-experimental
 langchain-ollama
 langchain-postgres
 langchain-text-splitters

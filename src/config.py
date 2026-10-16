@@ -1,21 +1,30 @@
-import os
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from dotenv import load_dotenv
 
-load_dotenv()
+class Settings(BaseSettings):
+    # Database
+    POSTGRES_USER: str = "rag"
+    POSTGRES_PASSWORD: str = "rag"
+    POSTGRES_HOST: str = "127.0.0.1"
+    POSTGRES_PORT: str = "5432"
+    POSTGRES_DB: str = "rag"
+    DATABASE_URL: str = ""
 
-POSTGRES_USER = os.environ["POSTGRES_USER"]
-POSTGRES_PASSWORD = os.environ["POSTGRES_PASSWORD"]
-POSTGRES_DB = os.environ["POSTGRES_DB"]
-POSTGRES_HOST = os.environ["POSTGRES_HOST"]
-POSTGRES_PORT = os.environ["POSTGRES_PORT"]
+    # Ollama
+    OLLAMA_MODEL: str = "qwen2.5:7b"
+    OLLAMA_HOST: str = "http://127.0.0.1:11434"
 
-DATABASE_URL = os.environ["DATABASE_URL"]
+    # Embedding
+    EMBEDDING_MODEL: str = "BAAI/bge-m3"
+    EMBEDDING_DIM: int = 1024
 
-#Ollama
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-#Embedding
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
-EMBEDDING_DIM = int(os.getenv("EMBEDDING_DIM", "1024"))
+    @property
+    def db_url(self) -> str:
+        if self.DATABASE_URL:
+            return self.DATABASE_URL
+        return f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+
+
+settings = Settings()
