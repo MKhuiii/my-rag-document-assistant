@@ -1,17 +1,15 @@
 name: Python CI Pipeline
 
-# 1. Định nghĩa sự kiện kích hoạt Workflow
 on:
   push:
-    branches: [ "main", "master", "dev" ]  # Kích hoạt khi push vào các branch này
+    branches: [ "main", "master", "dev" ]
   pull_request:
-    branches: [ "main", "master", "dev" ]  # Kích hoạt khi tạo Pull Request
+    branches: [ "main", "master", "dev" ]
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Chạy trên máy chủ ảo Ubuntu của GitHub
+    runs-on: ubuntu-latest
 
-    # 2. Bật container PostgreSQL + pgvector ngầm để phục vụ test
     services:
       postgres:
         image: pgvector/pgvector:pg16
@@ -28,40 +26,32 @@ jobs:
           --health-retries 5
 
     steps:
-    # Bước A: Tải code từ GitHub về máy chủ ảo
     - name: Checkout mã nguồn
       uses: actions/checkout@v4
 
-    # Bước B: Thiết lập Python 3.10
     - name: Cài đặt Python 3.10
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         cache: 'pip'
 
-    # Bước C: Cài đặt các thư viện cần thiết
     - name: Cài đặt dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pytest ruff
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    # Bước D: Kiểm tra lỗi cú pháp và Import (Linting)
     - name: Kiểm tra code style & cú pháp bằng Ruff
-      run: |
-        # Đảm bảo không có lỗi SyntaxError hoặc Unused Import
-        ruff check .
+      run: ruff check .
 
-    # Bước E: Chạy tự động các bài test bằng pytest
     - name: Chạy bài test tự động
       env:
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_NAME: rag
-        DB_USER: rag
-        DB_PASSWORD: rag
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_DB: rag
+        POSTGRES_USER: rag
+        POSTGRES_PASSWORD: rag
         OLLAMA_HOST: http://localhost:11434
         PYTHONPATH: .
       run: |
-        # Chạy toàn bộ file test trong thư mục test/
         pytest -v
