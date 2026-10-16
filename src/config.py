@@ -18,6 +18,10 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = "BAAI/bge-m3"
     EMBEDDING_DIM: int = 1024
 
+    #Chunking
+    CHUNK_SIZE: int = 512
+    CHUNK_OVERLAP: int = 50
+
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     @property
