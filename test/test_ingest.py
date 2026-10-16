@@ -1,5 +1,7 @@
 import os
+from unittest.mock import MagicMock, patch
 
+from src.config import settings
 from src.ingestion.indexer import index_document
 
 
@@ -18,6 +20,17 @@ def test_ingest_document():
 
     num_chunks = index_document(sample_file)
     assert num_chunks > 0
+    # 1. Tạo giả lập (Mock) cho Embedding Model trả về vector 1024 chiều
+    mock_embedding = MagicMock()
+    mock_embedding.embed_documents.side_effect = lambda texts: [
+        [0.1] * settings.EMBEDDING_DIM for _ in texts
+    ]
+    mock_embedding.embed_query.return_value = [0.1] * settings.EMBEDDING_DIM
+
+    # 2. Patch hàm get_embedding_model trong module vector_db
+    with patch("src.core.vector_db.get_embedding_model", return_value=mock_embedding):
+        num_chunks = index_document(sample_file)
+        assert num_chunks > 0
 
 
 if __name__ == "__main__":
