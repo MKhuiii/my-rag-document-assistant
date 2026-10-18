@@ -12,7 +12,7 @@ def test_rag_chain_mock():
     mock_llm.invoke.return_value = "Đây là câu trả lời giả lập từ LLM."
 
     with (
-        patch("src.rag.chains.rag_chain.get_retriever", return_value=mock_retriever),
+        patch("src.rag.chains.get_retriever", return_value=mock_retriever),
         patch("src.rag.chains.get_llm", return_value=mock_llm),
     ):
         chain = create_rag_chain()
