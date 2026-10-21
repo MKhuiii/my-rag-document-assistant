@@ -4,6 +4,7 @@ streamlit
 unstructured
 requests
 python-docx
+pypdf
 pytest
 python-multipart
 python-dotenv
