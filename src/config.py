@@ -2,6 +2,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    BACKEND_URL: str = "http://127.0.0.1:8000"
+
     # Database
     POSTGRES_USER: str = "rag"
     POSTGRES_PASSWORD: str = "rag"
