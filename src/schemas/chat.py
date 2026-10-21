@@ -1,10 +1,9 @@
-
 from pydantic import BaseModel
 
 
 class ChatMessage(BaseModel):
     role: str  # user hoặc assistant
-    content: set
+    content: str
 
 
 class ChatRequest(BaseModel):

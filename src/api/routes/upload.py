@@ -9,7 +9,7 @@ from src.ingestion.indexer import index_document
 router = APIRouter(prefix="/uploads", tags=["updates"])
 
 
-@router.post("/api/upload")
+@router.post("/")
 def upload_document(file: Annotated[UploadFile, File()]):
     """API tải lên tài liệu và tự động Chunking/Embedding vào CSDL."""
     allowed_extensions = [".pdf", ".txt", ".docx", ".doc"]

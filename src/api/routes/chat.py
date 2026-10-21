@@ -9,8 +9,8 @@ from src.schemas.chat import ChatRequest, ChatResponse
 router = APIRouter(prefix="/chats", tags=["chats"])
 
 
-@router.post("/api/chat", response_model=ChatResponse)
-async def chat(
+@router.post("/", response_model=ChatResponse)
+def chat(
     request: ChatRequest,
     rag_chain: Annotated[Runnable, Depends(get_rag_chain_dep)],
 ):
