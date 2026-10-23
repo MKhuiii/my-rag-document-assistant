@@ -35,6 +35,8 @@
 - **GitHub Repository:** [RAG Document Assistant](https://github.com/MKhuiii/rag-document-assistant)
 
 
+
+
 ## 🚀 Usage
 
 Khởi chạy hệ thống RAG Assistant chỉ với vài câu lệnh đơn giản:
@@ -48,3 +50,25 @@ uvicorn src.main:app --reload --port 8000
 
 # 3. Khởi chạy Streamlit Web UI (Port 8501)
 streamlit run app.py
+
+```
+## ⬇️ Installation
+
+**Tải và cài đặt Ollama:**
+   - Tải bản cài đặt phù hợp với hệ điều hành (Windows / macOS / Linux) tại [ollama.com/download](https://ollama.com/download).
+
+**Khởi chạy Dịch vụ Ollama:**
+   - Đảm bảo ứng dụng Ollama đang chạy hoặc khởi chạy qua lệnh:
+     ```bash
+     ollama serve
+     ```
+
+**Tải các mô hình AI phục vụ dự án:**
+   Chạy các lệnh sau trong Terminal / PowerShell để tải 2 mô hình bắt buộc:
+   ```bash
+   # Mô hình Embedding (Tạo vector cho văn bản)
+   ollama pull bge-m3
+
+   # Mô hình LLM (Suy luận & Trả lời câu hỏi)
+   ollama pull qwen2.5:7b
+   ```
